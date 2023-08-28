@@ -18,19 +18,7 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')))
 }
 
-// app.use('/', routes);
-
-app.get('/', (req, res) => {
-    const indexPagePath = path.join(__dirname, '../client/build/index.html');
-    fs.access(indexPagePath, (err) => {
-      if (err) {
-        log(LogLevel.warn, `Can't find file ' ${indexPagePath}`);
-        res.status(404).send(`Can't find file ${indexPagePath}`);
-      } else {
-        res.sendFile(indexPagePath);
-      }
-    });
-  });
+app.use('/', routes);
 
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
