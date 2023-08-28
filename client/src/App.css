@@ -1,0 +1,126 @@
+img{
+  max-width: 100%;
+}
+.my-btn {
+  min-width: 150px;
+}
+
+.prompt-body {
+  margin: 50px auto;
+  max-width: 80%;
+}
+.prompt-form {
+  margin: 50px;
+}
+.prompt-form label {
+  text-align: center;
+  width: 100%;
+}
+.prompt-form textarea {
+  display: block;
+  margin: 10px auto;
+  width: 60%;
+  height: 100px;
+}
+.prompt-form button {
+  display: block;
+  margin: 10px auto;
+}
+.prompt-result img {
+  display: block;
+  max-width: 800px;
+  margin: auto;
+}
+.final-buttons { 
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+.final-buttons .my-btn {
+  margin: 0 10px
+}
+.products-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.product-display {
+  width: 30%;
+}
+.product-display img {
+  width: 100%;
+  margin: auto;
+}
+.product-display h3,
+.product-display h4 {
+  text-align: center;
+}
+.product-display .sizes,
+.product-display .colors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.product-display .color {
+  margin: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 0.25em;
+}
+.product-display .size {
+  margin: 10px;
+}
+.product-display .my-btn {
+  display: block;
+  margin: auto;
+}
+.product-modal {
+  display: flex;
+}
+.product-modal .sizes,
+.product-modal .colors {
+  display: flex;
+  flex-wrap: wrap;
+}
+.product-modal .color {
+  margin: 5px;
+  height: 20px;
+  width: 20px;
+  border-radius: 0.25em;
+}
+.product-modal .form-check-input {
+  height: 20px;
+  width: 20px;
+  margin-top: 0;
+  background-color: transparent;
+  border: none;
+}
+.product-modal .form-check-input[type=radio] {
+  border-radius: 0.25em;
+}
+.product-modal .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem rgba(15,11,13,.25);
+}
+.product-modal .form-check-input:checked[type=radio] {
+  --bs-form-check-bg-image: none;
+  box-shadow: 0px 0px 3px 3px #F36196;
+}
+.product-modal .color.active {
+  outline: 2px solid #ccc;
+}
+.product-modal .form-check-input:disabled {
+  --bs-form-check-bg-image: url('./Image/soldout.webp');
+  background-color: rgba(255, 255, 255,0.95);
+}
+.modal-info {
+  width: 50%;
+}
+.modal-info .sizes {
+  margin: 10px;
+}
+.empty-cart {
+  display: none;
+}
+.show {
+  display: block;
+}
