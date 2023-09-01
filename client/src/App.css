@@ -124,3 +124,8 @@ img{
 .show {
   display: block;
 }
+
+.spin {
+  display: flex;
+  justify-content: center;
+}

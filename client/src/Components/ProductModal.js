@@ -132,7 +132,6 @@ export const ProductModal = (props) => {
                     width: myWidth,
                     top: myTop,
                     left: myLeft,
-                    opacity: 0.5,
                 });
                 canvas.bringToFront(imgObj)
                 canvas.add(imgObj).renderAll();

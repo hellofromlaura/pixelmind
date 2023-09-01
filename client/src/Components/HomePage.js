@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/esm/Button';
+import Spinner from 'react-bootstrap/Spinner';
 import { ProductModal } from './ProductModal';
 import { CartModal } from './CartModal';
 
@@ -14,8 +15,10 @@ export const HomePage = () => {
     const [productsInfo, setProductsInfo] = useState([]);
     const productTemplates = [23958, 24257, 24259];
     const noImgProduct = [5723108, 5723107, 5723106, 5723105]
+    const [letSpin, setLetSpin] = useState(false);
 
     const handleSubmit = (e) => {
+        setLetSpin(true)
         e.preventDefault();
         const formData = new FormData(e.target);        
         const formJson = Object.fromEntries(formData.entries());
@@ -28,6 +31,7 @@ export const HomePage = () => {
             })
         .then(res => res.json())
         .then(result => {
+            setLetSpin(false)
             setPromptRes(result.Imagine)
             setHasImage(true);
         })
@@ -70,6 +74,7 @@ export const HomePage = () => {
     }
     
     const addtocart = (item) => {
+        
         setCartItems((currentObjects) => currentObjects.concat([item]))
     }
 
@@ -89,6 +94,13 @@ export const HomePage = () => {
                     <Button className='my-btn' type='submit'>Submit</Button>
                 </form>
             </div>
+            {letSpin ? (
+                <div className='spin'>
+                    <Spinner animation="border" />
+                </div>
+            ) : 
+            null}
+            
             {hasImage ? (
                 <div className='prompt-result'>
                     <img src={promptRes.uri} alt='' />
@@ -131,7 +143,7 @@ export const HomePage = () => {
                                     return (<div className='size' key={data.id}>{data.name}</div>)
                                 })}
                             </div>
-                            <Button className='my-btn' onClick={() => { setModalShow(true); setModalProd(prod) }}>Buy</Button>
+                            <Button className='my-btn' onClick={() => { setModalShow(true); setModalProd(prod) }}>See your creation</Button>
                             
                         </div>
                     )
