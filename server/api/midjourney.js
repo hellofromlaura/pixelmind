@@ -16,7 +16,7 @@ const getMidjourney = async (req, res) => {
     try {
         const prompt = req.body[0];
         await client.Connect();
-        await client.Relax();
+        await client.Fast();
         const Imagine = await client.Imagine(prompt, (uri, progress) => {
             console.log("Imagine", uri, "progress", progress);
         });
