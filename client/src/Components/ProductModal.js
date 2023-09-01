@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Button from 'react-bootstrap/esm/Button';
+import Toast from 'react-bootstrap/Toast';
+import ToastContainer from 'react-bootstrap/ToastContainer';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { fabric } from 'fabric';
@@ -22,6 +24,7 @@ export const ProductModal = (props) => {
     const [sizes, setSizes] = useState()
     const [backorder, setBackorder] = useState([])
     const [cartAlert, setCartAlert] = useState(false)
+    const [show, setShow] = useState(false);
 
     const canvasRef = useRef();
 
@@ -58,6 +61,7 @@ export const ProductModal = (props) => {
                 return obj.color.id === selectedColorID && obj.size.id === parseInt(selectedSizeId)
             })
             props.addtocart({'product':prod, 'variant': result[0], 'image': props.finalimage})
+            setShow(true)
         }
     }
 
@@ -160,6 +164,13 @@ export const ProductModal = (props) => {
     
     return (
         <Modal {...props} size='lg' aria-labelledby='contained-modal-title-vcenter' centered>
+            <ToastContainer position='middle-center'>
+                <Toast onClose={() => setShow(false)} show={show} animation={true} delay={30000} autohide>
+                    <Toast.Header></Toast.Header>
+                    <Toast.Body>Woohoo, you added an item to your cart!</Toast.Body>
+                </Toast>
+            </ToastContainer>
+            
             <Modal.Header closeButton />
             <Modal.Body>
                 <div className='product-modal'>
@@ -212,7 +223,6 @@ export const ProductModal = (props) => {
                                 Select color AND size!
                             </Alert>
                         </div>
-                        
                         
                         <div>
                             <Button className='my-btn' onClick={() => sendToCart(props.product)}>Add to cart</Button>

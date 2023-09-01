@@ -129,3 +129,15 @@ img{
   display: flex;
   justify-content: center;
 }
+.toast-header {
+  justify-content: flex-end;
+}
+.toast-body {
+  text-align: center;
+}
+.toast-container {
+  width: -webkit-fill-available;
+}
+.toast {
+  background-color: #ffff;
+}
