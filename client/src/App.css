@@ -8,9 +8,10 @@ img{
   display: flex;
   justify-content: end;
   max-width: 1150px;
-  margin: 10px;
+  margin: 10px auto;
 }
 .my-btn.cart, .my-btn.cart:active {
+  position: relative;
   background-color: transparent;
   border: none;
 }
@@ -19,8 +20,8 @@ img{
 }
 #cart-count {
   position: absolute;
-  top: 15px;
-  right: 55px;
+  top: 7px;
+  right: 45px;
   width: 23px;
   height: 23px;
   padding: 5px;
