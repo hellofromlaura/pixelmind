@@ -125,7 +125,7 @@ export const ProductModal = (props) => {
                 imgObj.scale(0.185);
                 imgObj.selectable = false;
                 imgObj.transparentCorners = false;
-                canvas.add(imgObj).renderAll();
+                canvas.insertAt(imgObj, 0);
             })
 
             fabric.Image.fromURL(props.finalimage, (imgObj) => {
@@ -137,8 +137,7 @@ export const ProductModal = (props) => {
                     top: myTop,
                     left: myLeft,
                 });
-                canvas.bringToFront(imgObj)
-                canvas.add(imgObj).renderAll();
+                canvas.insertAt(imgObj, 1);
             })
 
             setCanvas(canvas)

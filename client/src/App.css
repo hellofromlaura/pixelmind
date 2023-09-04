@@ -4,7 +4,33 @@ img{
 .my-btn {
   min-width: 150px;
 }
-
+.nav {
+  display: flex;
+  justify-content: end;
+  max-width: 1150px;
+  margin: 10px;
+}
+.my-btn.cart, .my-btn.cart:active {
+  background-color: transparent;
+  border: none;
+}
+.my-btn.cart img {
+  width: 50px;
+}
+#cart-count {
+  position: absolute;
+  top: 15px;
+  right: 55px;
+  width: 23px;
+  height: 23px;
+  padding: 5px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #6085f7;
+  color: #ffffff;
+}
 .prompt-body {
   margin: 50px auto;
   max-width: 80%;

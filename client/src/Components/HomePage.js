@@ -16,9 +16,15 @@ export const HomePage = () => {
     const productTemplates = [23958, 24257, 24259];
     const noImgProduct = [5723108, 5723107, 5723106, 5723105]
     const [letSpin, setLetSpin] = useState(false);
+    const [submitBtn, setSubmitBtn] = useState('Submit')
 
     const handleSubmit = (e) => {
+        if(hasImage) {
+            setHasImage(false);
+            setPromptRes({});
+        }
         setLetSpin(true)
+        setSubmitBtn('Generating Image')
         e.preventDefault();
         const formData = new FormData(e.target);        
         const formJson = Object.fromEntries(formData.entries());
@@ -32,8 +38,10 @@ export const HomePage = () => {
         .then(res => res.json())
         .then(result => {
             setLetSpin(false)
+            setSubmitBtn('Submit')
             setPromptRes(result.Imagine)
             setHasImage(true);
+            
         })
     };
 
@@ -74,7 +82,7 @@ export const HomePage = () => {
     }
     
     const addtocart = (item) => {
-        
+
         setCartItems((currentObjects) => currentObjects.concat([item]))
     }
 
@@ -84,14 +92,20 @@ export const HomePage = () => {
 
     return (
         <>
-        <Button className='my-btn' onClick={() => { setLgShow(true)}}>Cart {cartItems.length}</Button>
+        <div className='nav'>
+            <Button className='my-btn cart' onClick={() => { setLgShow(true)}}>
+                <img src={require('../Image/cart.png')} alt='cart' /> 
+                <span id="cart-count">{cartItems.length}</span>
+            </Button>
+        </div>
+        
         <div className='prompt-body'>
             <div className='prompt-form'>
                 <form onSubmit={handleSubmit} method='POST'>
                     <label>
                         Input your prompt: <textarea className='prompt' name='prompt' defaultValue='' />
                     </label>
-                    <Button className='my-btn' type='submit'>Submit</Button>
+                    <Button className='my-btn' type='submit'>{submitBtn}</Button>
                 </form>
             </div>
             {letSpin ? (
