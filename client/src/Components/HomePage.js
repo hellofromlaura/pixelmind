@@ -38,7 +38,7 @@ export const HomePage = () => {
         .then(res => res.json())
         .then(result => {
             setLetSpin(false)
-            setSubmitBtn('Submit')
+            setSubmitBtn('Try something new')
             setPromptRes(result.Imagine)
             setHasImage(true);
             
@@ -47,6 +47,7 @@ export const HomePage = () => {
 
     const handleImage = (e) => {
         if(e.target.textContent[0] === 'U') {
+            setLetSpin(true)
             fetch('/upscale',
             {
                 method: 'POST',
@@ -61,6 +62,7 @@ export const HomePage = () => {
             })
             .then(res => res.json())
             .then(json => {
+                setLetSpin(false)
                 setPromptRes(json.Upscale)
                 setHasImage(true);
                 setFinalImage(json.Upscale.uri)
@@ -85,10 +87,6 @@ export const HomePage = () => {
 
         setCartItems((currentObjects) => currentObjects.concat([item]))
     }
-
-    // useEffect (() => {
-    //     getProducts(noImgProduct).then(data => setProductsInfo(data))
-    // }, [])
 
     return (
         <>
@@ -135,7 +133,7 @@ export const HomePage = () => {
         {productsInfo ? (
             <div className='products-results'>
             {productsInfo.map(prod => {
-                if (prod.mockups !== []) {
+                if (prod.mockups.length !== 0) {
                     return (
                         <div className='product-display' key={prod.id}>
                             {prod.mockups.map(image => {

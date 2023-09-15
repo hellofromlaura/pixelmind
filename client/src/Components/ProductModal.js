@@ -57,10 +57,11 @@ export const ProductModal = (props) => {
             setCartAlert(true)
         } else {
             const variants = prod.product_variants;
+            const jsonCanva = canvas.toJSON();
             var result = variants.filter(obj => {
                 return obj.color.id === selectedColorID && obj.size.id === parseInt(selectedSizeId)
             })
-            props.addtocart({'product':prod, 'variant': result[0], 'image': props.finalimage})
+            props.addtocart({'product':prod, 'variant': result[0], 'image': props.finalimage, 'mock': jsonCanva})
             setShow(true)
         }
     }

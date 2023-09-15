@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect, useRef} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/esm/Button';
+import { fabric } from 'fabric';
 
 export const CartModal = (props) => {
     const [checkout, setCheckout] = useState(false)
+    const [canvas, setCanvas] = useState()
+
+    const canvasRef = useRef();
+
     console.log(props.cartItems[0])
 
 
@@ -52,7 +58,20 @@ export const CartModal = (props) => {
     const priceTotal = props.cartItems.reduce((accumulator, object) => {
                     return accumulator + parseFloat(object.variant.price);
                 }, 0);
+
+    // useEffect(() => {
+    //     const json = JSON.stringify(props.cartItems[0].mock);
+    //     const canvas = new fabric.Canvas(canvasRef.current, {
+    //         height: 180,
+    //         width: 180,
+    //     })
         
+    //     canvas.loadFromJSON(json, canvas.renderAll.bind(canvas))
+    //     canvas.setZoom(0.5);
+    //     setCanvas(canvas)
+    // }, [props.cartItems])
+
+    
 
     return (
         <>
@@ -115,20 +134,52 @@ export const CartModal = (props) => {
                         null
                     }
                     <div className='products'>
-                        {
-                            props.cartItems.map(item => {
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product</th>
+                                    <th>Size</th>
+                                    <th>Color</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                    
+                                    {props.cartItems.map((item, index) => {
+                                            console.log(item)
 
-                                console.log(item)
-                                return (
-                                    <>
-                                        <h3>{item.product.name}</h3>
-                                        <p>{item.variant.price}</p>
-                                        <p>{item.variant.size.name}</p>
-                                        <p>{item.variant.color.name}</p>
-                                    </>
-                                )
-                            })
-                        }
+                                            const json = JSON.stringify(item.mock);
+                                            const canvas = new fabric.Canvas('myCanvas' + index, {
+                                                height: 180,
+                                                width: 180,
+                                            })
+                                            
+                                            canvas.loadFromJSON(json, canvas.renderAll.bind(canvas))
+                                            canvas.setZoom(0.5);
+                                            // setCanvas(canvas)
+
+                                            return (
+                                                <>
+                                                <tr>
+                                                    <td><canvas id={'myCanvas' + index} /></td>
+                                                    <td><h3>{item.product.name}</h3></td> 
+                                                    <td>{item.variant.price}</td>
+                                                    <td>{item.variant.size.name}</td>
+                                                    <td>{item.variant.color.name}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                </>
+                                            )
+                                        })
+                                    }
+                                
+                            </tbody>
+                        </Table>
                     </div>
                 </div>
 
