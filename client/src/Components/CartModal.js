@@ -1,4 +1,4 @@
-import React, {useState,useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -10,12 +10,11 @@ import { fabric } from 'fabric';
 
 export const CartModal = (props) => {
     const [checkout, setCheckout] = useState(false)
-    const [canvas, setCanvas] = useState()
+    const [hasMock, setHasMock] = useState(false)
 
-    const canvasRef = useRef();
-
-    console.log(props.cartItems[0])
-
+    useEffect(() => {
+        setHasMock(true)
+    }, [])
 
     const placeOrder = (data) => {
         console.log('Placing order', data)
@@ -58,20 +57,6 @@ export const CartModal = (props) => {
     const priceTotal = props.cartItems.reduce((accumulator, object) => {
                     return accumulator + parseFloat(object.variant.price);
                 }, 0);
-
-    // useEffect(() => {
-    //     const json = JSON.stringify(props.cartItems[0].mock);
-    //     const canvas = new fabric.Canvas(canvasRef.current, {
-    //         height: 180,
-    //         width: 180,
-    //     })
-        
-    //     canvas.loadFromJSON(json, canvas.renderAll.bind(canvas))
-    //     canvas.setZoom(0.5);
-    //     setCanvas(canvas)
-    // }, [props.cartItems])
-
-    
 
     return (
         <>
@@ -147,10 +132,9 @@ export const CartModal = (props) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                
                                     
                                     {props.cartItems.map((item, index) => {
-                                            console.log(item)
+                                            console.log('item ', item)
 
                                             const json = JSON.stringify(item.mock);
                                             const canvas = new fabric.Canvas('myCanvas' + index, {
@@ -160,7 +144,13 @@ export const CartModal = (props) => {
                                             
                                             canvas.loadFromJSON(json, canvas.renderAll.bind(canvas))
                                             canvas.setZoom(0.5);
-                                            // setCanvas(canvas)
+
+                                            console.log('index', index, 'number of items', props.cartItems.length, index === props.cartItems.length)
+
+                                            // if(index === (props.cartItems.length - 1)) {
+                                            //     setHasMock(true)
+                                            // }
+                                            // setCanvas((currentObjects) => currentObjects.concat([canvas]))
 
                                             return (
                                                 <>
