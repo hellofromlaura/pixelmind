@@ -13,6 +13,7 @@ export const CartModal = (props) => {
     const [hasMock, setHasMock] = useState(false)
 
     useEffect(() => {
+        console.log('Props ', props)
         setHasMock(true)
     }, [])
 
@@ -54,9 +55,7 @@ export const CartModal = (props) => {
         })
     }
 
-    const priceTotal = props.cartItems.reduce((accumulator, object) => {
-                    return accumulator + parseFloat(object.variant.price);
-                }, 0);
+    const priceTotal = props.cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.variant.price), 0);
 
     return (
         <>
@@ -134,8 +133,6 @@ export const CartModal = (props) => {
                             <tbody>
                                     
                                     {props.cartItems.map((item, index) => {
-                                            console.log('item ', item)
-
                                             const json = JSON.stringify(item.mock);
                                             const canvas = new fabric.Canvas('myCanvas' + index, {
                                                 height: 180,
@@ -145,13 +142,6 @@ export const CartModal = (props) => {
                                             canvas.loadFromJSON(json, canvas.renderAll.bind(canvas))
                                             canvas.setZoom(0.5);
 
-                                            console.log('index', index, 'number of items', props.cartItems.length, index === props.cartItems.length)
-
-                                            // if(index === (props.cartItems.length - 1)) {
-                                            //     setHasMock(true)
-                                            // }
-                                            // setCanvas((currentObjects) => currentObjects.concat([canvas]))
-
                                             return (
                                                 <>
                                                 <tr>
@@ -160,8 +150,11 @@ export const CartModal = (props) => {
                                                     <td>{item.variant.price}</td>
                                                     <td>{item.variant.size.name}</td>
                                                     <td>{item.variant.color.name}</td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{item.quantity}</td>
+                                                    <td> <Button className='my-btn trash' onClick={() => { props.removefromcart(item.id)}}>
+                                                            <img src={require('../Image/trash.png')} alt='cart' /> 
+                                                        </Button>
+                                                    </td>
                                                 </tr>
                                                 </>
                                             )

@@ -82,10 +82,37 @@ export const HomePage = () => {
         )
         return Promise.all(response)
     }
+
+    useEffect(() => {
+        console.log('Cart Items ', cartItems)
+    })
     
     const addtocart = (item) => {
+        const isInArray = cartItems.some(obj => obj.id === item.id)
+        if(cartItems.length >= 1 && isInArray) {
+            console.log('Inside if statement')
+            let el =
+            cartItems.map(obj => {
+                if(obj.id === item.id) {
+                    console.log('Item already in cart')
+                    obj.quantity = obj.quantity + 1
+                }
+                return obj
+            })
+            console.log('Element ', el)
+            setCartItems(el)
+        } else {
+            setCartItems((currentObject) => [...currentObject, item])
+        }
+    }
 
-        setCartItems((currentObjects) => currentObjects.concat([item]))
+    const removefromcart = (item) => {
+        console.log(item)
+        setCartItems((currentObject) => currentObject.filter(obj => obj.id !== item))
+    }
+
+    const editcart = (item) => {
+        return
     }
 
     return (
@@ -174,11 +201,8 @@ export const HomePage = () => {
 
         
         {lgShow && (
-            <CartModal show={lgShow} onHide={() => setLgShow(false)} cartItems={cartItems}/>
+            <CartModal show={lgShow} onHide={() => setLgShow(false)} removefromcart={removefromcart} editcart={editcart} cartItems={cartItems}/>
         )}
         </>
     )
 }
-
-//todo: fix useEffect
-//todo: add quantity option to product order

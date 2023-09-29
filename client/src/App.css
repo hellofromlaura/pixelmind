@@ -10,6 +10,7 @@ img{
   max-width: 1150px;
   margin: 10px auto;
 }
+.my-btn.trash, .my-btn.trash:active,
 .my-btn.cart, .my-btn.cart:active {
   position: relative;
   background-color: transparent;
@@ -18,6 +19,7 @@ img{
 .my-btn.cart img {
   width: 50px;
 }
+
 #cart-count {
   position: absolute;
   top: 7px;

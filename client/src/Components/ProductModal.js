@@ -61,7 +61,7 @@ export const ProductModal = (props) => {
             var result = variants.filter(obj => {
                 return obj.color.id === selectedColorID && obj.size.id === parseInt(selectedSizeId)
             })
-            props.addtocart({'product':prod, 'variant': result[0], 'image': props.finalimage, 'mock': jsonCanva})
+            props.addtocart({'id': result[0].id, 'product':prod, 'variant': result[0], 'image': props.finalimage, 'mock': jsonCanva, 'quantity': 1})
             setShow(true)
         }
     }
