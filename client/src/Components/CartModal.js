@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/esm/Button';
 import { fabric } from 'fabric';
@@ -118,16 +118,16 @@ export const CartModal = (props) => {
                         null
                     }
                     <div className='products'>
-                        <Table striped bordered hover>
+                        <Table className='cart-table' striped bordered hover>
                             <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
-                                    <th>Color</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Remove</th>
+                                    <th className='image-col'>Image</th>
+                                    <th className='product-col'>Product</th>
+                                    <th className='size-col'>Size</th>
+                                    <th className='color-col'>Color</th>
+                                    <th className='price-col'>Price</th>
+                                    <th className='quantity-col'>Quantity</th>
+                                    <th className='remove-col'>Remove</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -147,11 +147,18 @@ export const CartModal = (props) => {
                                                 <tr>
                                                     <td><canvas id={'myCanvas' + index} /></td>
                                                     <td><h3>{item.product.name}</h3></td> 
-                                                    <td>{item.variant.price}</td>
                                                     <td>{item.variant.size.name}</td>
                                                     <td>{item.variant.color.name}</td>
-                                                    <td>{item.quantity}</td>
-                                                    <td> <Button className='my-btn trash' onClick={() => { props.removefromcart(item.id)}}>
+                                                    <td>{item.variant.price}</td>
+                                                    <td>
+                                                        <InputGroup className='mb-3'>
+                                                            <Button variant='outline-secondary' size='sm' onClick={() => { props.minus(item.id)}}>-</Button>
+                                                            <Form.Control aria-label='' aria-describedby='basic-addon1' size='sm' value={item.quantity}/>
+                                                            <Button variant='outline-primary' size='sm' onClick={() => { props.plus(item.id)}}>+</Button>
+                                                        </InputGroup>
+                                                        {item.quantity}
+                                                    </td>
+                                                    <td> <Button className='trash' onClick={() => { props.removefromcart(item.id)}}>
                                                             <img src={require('../Image/trash.png')} alt='cart' /> 
                                                         </Button>
                                                     </td>

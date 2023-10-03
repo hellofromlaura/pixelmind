@@ -90,16 +90,13 @@ export const HomePage = () => {
     const addtocart = (item) => {
         const isInArray = cartItems.some(obj => obj.id === item.id)
         if(cartItems.length >= 1 && isInArray) {
-            console.log('Inside if statement')
             let el =
             cartItems.map(obj => {
                 if(obj.id === item.id) {
-                    console.log('Item already in cart')
                     obj.quantity = obj.quantity + 1
                 }
                 return obj
             })
-            console.log('Element ', el)
             setCartItems(el)
         } else {
             setCartItems((currentObject) => [...currentObject, item])
@@ -111,8 +108,32 @@ export const HomePage = () => {
         setCartItems((currentObject) => currentObject.filter(obj => obj.id !== item))
     }
 
-    const editcart = (item) => {
-        return
+    const minus = (item) => {
+        console.log('Minus', item)
+        let el =
+        cartItems.map(obj => {
+            if(obj.id === item && obj.quantity > 1) {
+                
+                obj.quantity = obj.quantity - 1
+            }
+            return obj
+        })
+        console.log('Element ', el)
+            setCartItems(el)
+    }
+
+    const plus = (item) => {
+        console.log('Plus', item)
+        let el =
+        cartItems.map(obj => {
+            if(obj.id === item) {
+                
+                obj.quantity = obj.quantity +1
+            }
+            return obj
+        })
+        console.log('Element ', el)
+            setCartItems(el)
     }
 
     return (
@@ -201,7 +222,7 @@ export const HomePage = () => {
 
         
         {lgShow && (
-            <CartModal show={lgShow} onHide={() => setLgShow(false)} removefromcart={removefromcart} editcart={editcart} cartItems={cartItems}/>
+            <CartModal show={lgShow} onHide={() => setLgShow(false)} removefromcart={removefromcart} minus={minus} plus={plus}  cartItems={cartItems}/>
         )}
         </>
     )

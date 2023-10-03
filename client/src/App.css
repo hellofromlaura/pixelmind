@@ -10,7 +10,6 @@ img{
   max-width: 1150px;
   margin: 10px auto;
 }
-.my-btn.trash, .my-btn.trash:active,
 .my-btn.cart, .my-btn.cart:active {
   position: relative;
   background-color: transparent;
@@ -169,4 +168,36 @@ img{
 }
 .toast {
   background-color: #ffff;
+}
+
+.cart-table {
+  table-layout: auto;
+}
+.image-col {
+  width: 20%;
+}
+.product-col {
+  width: 25%;
+}
+.size-col {
+  width: 5%;
+}
+.color-col {
+  width: 10%;
+}
+.price-col {
+  width: 5%;
+}
+.quantity-col {
+  width: 15%;
+}
+.remove-col {
+  width: 5%;
+}
+
+.trash, .trash:active {
+  margin: auto;
+  position: relative;
+  background-color: transparent;
+  border: none;
 }
