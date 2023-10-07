@@ -136,12 +136,20 @@ export const HomePage = () => {
             setCartItems(el)
     }
 
+    const getCount = () => {
+        let count = 0
+        cartItems.map(obj => {
+            return count = count + obj.quantity;
+        })
+        return count;
+    }
+
     return (
         <>
         <div className='nav'>
             <Button className='my-btn cart' onClick={() => { setLgShow(true)}}>
                 <img src={require('../Image/cart.png')} alt='cart' /> 
-                <span id="cart-count">{cartItems.length}</span>
+                <span id="cart-count">{getCount()}</span>
             </Button>
         </div>
         

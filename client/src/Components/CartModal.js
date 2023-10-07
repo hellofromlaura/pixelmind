@@ -55,7 +55,17 @@ export const CartModal = (props) => {
         })
     }
 
-    const priceTotal = props.cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.variant.price), 0);
+    const priceTotal = () => {
+        console.log('Price total')
+        let total = 0;
+        props.cartItems.map(obj => {
+            console.log('obj', obj)
+            const prodTotal = parseFloat(obj.variant.price) * obj.quantity 
+            return total = total + prodTotal;
+        })
+        return total.toFixed(2)
+    }
+    // props.cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.variant.price), 0);
 
     return (
         <>
@@ -156,7 +166,6 @@ export const CartModal = (props) => {
                                                             <Form.Control aria-label='' aria-describedby='basic-addon1' size='sm' value={item.quantity}/>
                                                             <Button variant='outline-primary' size='sm' onClick={() => { props.plus(item.id)}}>+</Button>
                                                         </InputGroup>
-                                                        {item.quantity}
                                                     </td>
                                                     <td> <Button className='trash' onClick={() => { props.removefromcart(item.id)}}>
                                                             <img src={require('../Image/trash.png')} alt='cart' /> 
@@ -176,7 +185,7 @@ export const CartModal = (props) => {
 
 
                 <div>
-                    <h2>Total: ${priceTotal}</h2>
+                    <h2>Total: ${priceTotal()}</h2>
                     <p></p>
                 </div>
 
