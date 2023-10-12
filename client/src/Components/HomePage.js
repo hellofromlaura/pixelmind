@@ -5,7 +5,7 @@ import { ProductModal } from './ProductModal';
 import { CartModal } from './CartModal';
 
 export const HomePage = () => {
-    const [cartItems, setCartItems] = useState([])
+    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cart')) || [])
     const [modalShow, setModalShow] = useState(false);
     const [modalProd, setModalProd] = useState({});
     const [lgShow, setLgShow] = useState(false);
@@ -84,8 +84,8 @@ export const HomePage = () => {
     }
 
     useEffect(() => {
-        console.log('Cart Items ', cartItems)
-    })
+        window.localStorage.setItem('cart', JSON.stringify(cartItems));
+    }, [cartItems])
     
     const addtocart = (item) => {
         const isInArray = cartItems.some(obj => obj.id === item.id)
@@ -138,6 +138,7 @@ export const HomePage = () => {
 
     const getCount = () => {
         let count = 0
+        console.log('Cart items', cartItems)
         cartItems.map(obj => {
             return count = count + obj.quantity;
         })
